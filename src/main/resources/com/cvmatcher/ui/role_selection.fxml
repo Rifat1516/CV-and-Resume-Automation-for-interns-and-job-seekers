@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="16" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.cvmatcher.ui.RoleSelectionController">
+    <padding>
+        <Insets top="40" right="30" bottom="40" left="30"/>
+    </padding>
+    <Label fx:id="titleLabel" text="CV Job Matcher" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <Label text="Continue as:"/>
+    <Button text="User" onAction="#onChooseUser" maxWidth="200" prefHeight="40"/>
+    <Button text="Admin" onAction="#onChooseAdmin" maxWidth="200" prefHeight="40"/>
+    <Button text="Exit" onAction="#onExit" maxWidth="200"/>
+</VBox>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="18" style="-fx-background-color: linear-gradient(to bottom, #eaf2ff, #ffffff);"
+      xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.cvmatcher.ui.WelcomeController">
+    <padding>
+        <Insets top="60" right="30" bottom="60" left="30"/>
+    </padding>
+    <Label fx:id="titleLabel" text="CV Job Matcher" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #1a56db;"/>
+    <Label text="Find the right job for your CV, or the right candidate for your notice." wrapText="true" style="-fx-font-size: 14px;" maxWidth="360" textAlignment="CENTER"/>
+    <Button text="Continue" onAction="#onContinue" maxWidth="220" prefHeight="42" style="-fx-font-size: 14px; -fx-background-color: #1a56db; -fx-text-fill: white;"/>
+    <Button text="Exit" onAction="#onExit" maxWidth="220" prefHeight="36"/>
+</VBox>

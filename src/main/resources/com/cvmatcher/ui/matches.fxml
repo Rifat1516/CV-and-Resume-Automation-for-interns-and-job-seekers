@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.cvmatcher.ui.MatchesController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Label text="My matches" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <Label text="Every open job notice, automatically ranked against your CV (TF-IDF cosine similarity, no AI/ML model)." style="-fx-font-size: 11px; -fx-text-fill: gray;" wrapText="true"/>
+
+    <Label text="High match" style="-fx-font-weight: bold; -fx-text-fill: #1a7f37;"/>
+    <TableView fx:id="highTable" prefHeight="120">
+        <columns>
+            <TableColumn fx:id="highCompanyColumn" text="Company" prefWidth="150"/>
+            <TableColumn fx:id="highTitleColumn" text="Title" prefWidth="170"/>
+            <TableColumn fx:id="highScoreColumn" text="Match" prefWidth="80"/>
+            <TableColumn fx:id="highGapsColumn" text="Gaps" prefWidth="60"/>
+        </columns>
+    </TableView>
+
+    <Label text="Medium match" style="-fx-font-weight: bold; -fx-text-fill: #9a6700;"/>
+    <TableView fx:id="mediumTable" prefHeight="120">
+        <columns>
+            <TableColumn fx:id="mediumCompanyColumn" text="Company" prefWidth="150"/>
+            <TableColumn fx:id="mediumTitleColumn" text="Title" prefWidth="170"/>
+            <TableColumn fx:id="mediumScoreColumn" text="Match" prefWidth="80"/>
+            <TableColumn fx:id="mediumGapsColumn" text="Gaps" prefWidth="60"/>
+        </columns>
+    </TableView>
+
+    <Label text="Low match" style="-fx-font-weight: bold; -fx-text-fill: #cf222e;"/>
+    <TableView fx:id="lowTable" prefHeight="120">
+        <columns>
+            <TableColumn fx:id="lowCompanyColumn" text="Company" prefWidth="150"/>
+            <TableColumn fx:id="lowTitleColumn" text="Title" prefWidth="170"/>
+            <TableColumn fx:id="lowScoreColumn" text="Match" prefWidth="80"/>
+            <TableColumn fx:id="lowGapsColumn" text="Gaps" prefWidth="60"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="8">
+        <Button text="View gap details" onAction="#onViewGaps"/>
+        <Button text="Refresh" onAction="#onRefresh"/>
+        <Button text="Back" onAction="#onBack"/>
+    </HBox>
+    <Label fx:id="statusLabel" wrapText="true"/>
+</VBox>

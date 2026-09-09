@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.cvmatcher.ui.CvBuilderController">
+    <VBox spacing="10">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <Label text="Build your CV" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="fullNameField" promptText="Full name"/>
+        <TextField fx:id="emailField" promptText="Contact email"/>
+        <Label text="Professional summary"/>
+        <TextArea fx:id="summaryArea" prefRowCount="3" wrapText="true"/>
+
+        <Separator/>
+        <Label text="Skills" style="-fx-font-weight: bold;"/>
+        <HBox spacing="8">
+            <TextField fx:id="skillField" promptText="e.g. Java" HBox.hgrow="ALWAYS"/>
+            <Button text="Add" onAction="#onAddSkill"/>
+        </HBox>
+        <ListView fx:id="skillListView" prefHeight="80"/>
+
+        <Separator/>
+        <Label text="Education" style="-fx-font-weight: bold;"/>
+        <HBox spacing="8">
+            <TextField fx:id="eduInstitutionField" promptText="Institution" HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="eduDegreeField" promptText="Degree"/>
+        </HBox>
+        <HBox spacing="8">
+            <TextField fx:id="eduFieldField" promptText="Field of study" HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="eduStartYearField" promptText="Start year" prefWidth="100"/>
+            <TextField fx:id="eduEndYearField" promptText="End year" prefWidth="100"/>
+            <Button text="Add" onAction="#onAddEducation"/>
+        </HBox>
+        <ListView fx:id="educationListView" prefHeight="80"/>
+
+        <Separator/>
+        <Label text="Work experience" style="-fx-font-weight: bold;"/>
+        <HBox spacing="8">
+            <TextField fx:id="expCompanyField" promptText="Company" HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="expTitleField" promptText="Job title" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <TextArea fx:id="expDescriptionArea" promptText="Key responsibilities / achievements" prefRowCount="2" wrapText="true"/>
+        <HBox spacing="8">
+            <TextField fx:id="expStartYearField" promptText="Start year" prefWidth="100"/>
+            <TextField fx:id="expEndYearField" promptText="End year" prefWidth="100"/>
+            <Button text="Add" onAction="#onAddExperience"/>
+        </HBox>
+        <ListView fx:id="experienceListView" prefHeight="80"/>
+
+        <Separator/>
+        <Label text="Certificates" style="-fx-font-weight: bold;"/>
+        <HBox spacing="8">
+            <TextField fx:id="certNameField" promptText="Certificate name" HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="certIssuerField" promptText="Issuer"/>
+            <TextField fx:id="certYearField" promptText="Year" prefWidth="80"/>
+            <Button text="Add" onAction="#onAddCertification"/>
+        </HBox>
+        <ListView fx:id="certificationListView" prefHeight="80"/>
+
+        <Separator/>
+        <Label text="Languages" style="-fx-font-weight: bold;"/>
+        <HBox spacing="8">
+            <TextField fx:id="langNameField" promptText="Language" HBox.hgrow="ALWAYS"/>
+            <TextField fx:id="langProficiencyField" promptText="Proficiency (e.g. Native, Advanced)"/>
+            <Button text="Add" onAction="#onAddLanguage"/>
+        </HBox>
+        <ListView fx:id="languageListView" prefHeight="80"/>
+
+        <Separator/>
+        <Label text="Awards" style="-fx-font-weight: bold;"/>
+        <HBox spacing="8">
+            <TextField fx:id="awardField" promptText="e.g. SIGKDD/ACM Frank Award 2023" HBox.hgrow="ALWAYS"/>
+            <Button text="Add" onAction="#onAddAward"/>
+        </HBox>
+        <ListView fx:id="awardListView" prefHeight="80"/>
+
+        <Separator/>
+        <Label text="Memberships and affiliations" style="-fx-font-weight: bold;"/>
+        <HBox spacing="8">
+            <TextField fx:id="affiliationField" promptText="e.g. IEEE Computer Society (SES)" HBox.hgrow="ALWAYS"/>
+            <Button text="Add" onAction="#onAddAffiliation"/>
+        </HBox>
+        <ListView fx:id="affiliationListView" prefHeight="80"/>
+
+        <Separator/>
+        <HBox spacing="8">
+            <Button text="Save CV" onAction="#onSaveCv"/>
+            <Button text="Back" onAction="#onBack"/>
+        </HBox>
+        <Label fx:id="statusLabel" wrapText="true"/>
+    </VBox>
+</ScrollPane>
