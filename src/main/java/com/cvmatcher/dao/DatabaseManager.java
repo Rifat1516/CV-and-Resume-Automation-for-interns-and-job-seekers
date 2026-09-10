@@ -2,8 +2,6 @@ package com.cvmatcher.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,21 +15,35 @@ import java.sql.Statement;
 public final class DatabaseManager {
 
     private static final String DB_URL = "jdbc:sqlite:cvmatcher.db";
+    
     private static DatabaseManager instance;
     private Connection connection;
 
+    /**
+     * Private constructor to enforce Singleton pattern.
+     * Initializes the SQLite connection and enforces foreign key constraints.
+     */
     private DatabaseManager() {
         try {
-            connection = DriverManager.getConnection(DB_URL);
-            try (Statement st = connection.createStatement()) {
-                st.execute("PRAGMA foreign_keys = ON;");
+            this.connection = DriverManager.getConnection(DB_URL);
+            
+            try (final Statement statement = this.connection.createStatement()) {
+                statement.execute("PRAGMA foreign_keys = ON;");
             }
+            
             initSchema();
-        } catch (SQLException e) {
-            throw new RuntimeException("Failed to initialize database", e);
+            
+        } catch (final SQLException e) {
+            throw new RuntimeException("Failed to initialize database connection", e);
         }
     }
 
+    /**
+     * Retrieves the single, shared instance of the DatabaseManager.
+     * Synchronized to ensure thread safety during initial creation.
+     *
+     * @return The DatabaseManager instance.
+     */
     public static synchronized DatabaseManager getInstance() {
         if (instance == null) {
             instance = new DatabaseManager();
@@ -39,26 +51,42 @@ public final class DatabaseManager {
         return instance;
     }
 
+    /**
+     * Retrieves the active database connection.
+     *
+     * @return The SQLite Connection object.
+     */
     public Connection getConnection() {
-        return connection;
+        return this.connection;
     }
 
+    /**
+     * Reads the schema.sql file from the classpath and executes its statements
+     * to ensure the database tables are properly initialized.
+     */
     private void initSchema() {
-        try (InputStream is = getClass().getResourceAsStream("/db/schema.sql")) {
-            if (is == null) {
+        try (final InputStream inputStream = getClass().getResourceAsStream("/db/schema.sql")) {
+            
+            if (inputStream == null) {
                 throw new IOException("schema.sql not found on classpath");
             }
-            String sql = new String(is.readAllBytes());
-            try (Statement st = connection.createStatement()) {
-                for (String statement : sql.split(";")) {
-                    String trimmed = statement.trim();
-                    if (!trimmed.isEmpty()) {
-                        st.execute(trimmed);
+            
+            final String sqlContent = new String(inputStream.readAllBytes());
+            
+            try (final Statement statement = this.connection.createStatement()) {
+                final String[] sqlStatements = sqlContent.split(";");
+                
+                for (final String singleStatement : sqlStatements) {
+                    final String trimmedStatement = singleStatement.trim();
+                    
+                    if (!trimmedStatement.isEmpty()) {
+                        statement.execute(trimmedStatement);
                     }
                 }
             }
-        } catch (IOException | SQLException e) {
-            throw new RuntimeException("Failed to initialize schema", e);
+            
+        } catch (final IOException | SQLException e) {
+            throw new RuntimeException("Failed to initialize database schema", e);
         }
     }
 }
